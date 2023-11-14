@@ -1,0 +1,8 @@
+<ng-container *ngIf="layout$ | async as layout" [ngSwitch]="layout">
+  <app-navbar-layout *ngSwitchCase="layouts.Navbar">
+    <ng-content></ng-content>
+  </app-navbar-layout>
+  <app-blank-layout *ngSwitchDefault>
+    <ng-content></ng-content>
+  </app-blank-layout>
+</ng-container>

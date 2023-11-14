@@ -1,4 +1,5 @@
 import { EnvironmentType } from "@tempradar/core/environment/environment-type.enum";
+import { Layout } from "@tempradar/layout/layouts.enum";
 
 export class EnvironmentConfig {
   /**
@@ -10,6 +11,11 @@ export class EnvironmentConfig {
    * The current application version.
    */
   public version = '0.0.1';
+
+  /**
+   * The default layout to use throughout the applicaiton.
+   */
+  public defaultLayout = Layout.Navbar;
 
   /**
    * Build a new environment configuration using {@link initial initial parameters}.
