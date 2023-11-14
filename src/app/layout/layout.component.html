@@ -1,14 +1,19 @@
+
 @if (layout$ | async; as layout) {
   @switch(layout) {
     @case (layouts.Navbar) {
       <app-navbar-layout>
-        <ng-content></ng-content>
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
       </app-navbar-layout>
     }
     @default {
       <app-blank-layout>
-        <ng-content></ng-content>
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
       </app-blank-layout>
     }
   }
 }
+
+<ng-template #contentTemplate>
+  <ng-content></ng-content>
+</ng-template>

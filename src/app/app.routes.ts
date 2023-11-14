@@ -7,5 +7,11 @@ export const routes: Routes = [
   {
     path: "home",
     loadChildren: () => import("@tempradar/modules/home/home.module").then(m => m.HomeModule),
-  }
+  },
+
+  {
+    path: '**',
+    pathMatch: "full",
+    loadChildren: () => import('@tempradar/modules/errors/page-not-found/page-not-found.module').then(c => c.PageNotFoundModule)
+  },
 ];

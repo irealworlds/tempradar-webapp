@@ -11,5 +11,4 @@ import { LayoutComponent } from "@tempradar/layout/layout.component";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Tempradar';
 }

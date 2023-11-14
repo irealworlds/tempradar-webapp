@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { AsyncPipe } from "@angular/common";
+import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import { Observable, Subject, takeUntil } from "rxjs";
 import { Layout } from "@tempradar/layout/layouts.enum";
 import { LayoutService } from "@tempradar/layout/layout.service";
@@ -9,7 +9,7 @@ import { BlankLayoutComponent } from "@tempradar/layout/blank-layout/blank-layou
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [AsyncPipe, NavbarLayoutComponent, BlankLayoutComponent],
+  imports: [AsyncPipe, NavbarLayoutComponent, BlankLayoutComponent, NgTemplateOutlet],
   templateUrl: './layout.component.html',
 })
 export class LayoutComponent implements OnInit, OnDestroy {

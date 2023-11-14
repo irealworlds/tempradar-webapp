@@ -41,7 +41,7 @@ export class LayoutService {
           let preferredLayout = this._environment.defaultLayout;
           const dataLayout = data['layout'];  // eslint-disable-line
 
-          if (dataLayout) {
+          if (dataLayout !== undefined) {
             preferredLayout = dataLayout;
           } else if (setLayout) {
             preferredLayout = setLayout;

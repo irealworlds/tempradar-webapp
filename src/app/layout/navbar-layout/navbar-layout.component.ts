@@ -13,7 +13,7 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
       state('void', style({
         transform: 'scale(.95)',
         opacity: 0,
-        display: 'hidden',
+        display: 'none',
       })),
       state('*', style({
         transform: 'scale(1)',

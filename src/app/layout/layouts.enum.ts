@@ -1,4 +1,4 @@
 export enum Layout {
-  Blank,
-  Navbar,
+  Blank = 'blank',
+  Navbar = 'navbar',
 }
