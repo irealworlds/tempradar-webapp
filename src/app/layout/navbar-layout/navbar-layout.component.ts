@@ -10,7 +10,7 @@ import { CommonModule } from "@angular/common";
 export class NavbarLayoutComponent {
   navbarItems = [
     {
-      name: 'Home',
+      name: $localize `Home`,
       uri: '/home',
     }
   ];

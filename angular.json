@@ -13,13 +13,22 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-GB",
+        "locales": {
+          "ro-RO": {
+            "translation": "src/locale/messages.ro-RO.json"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tempradar",
+            "outputPath": "dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "localize": true,
             "polyfills": [
               "zone.js"
             ],
