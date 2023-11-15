@@ -1,5 +1,6 @@
 import { EnvironmentType } from "@tempradar/core/environment/environment-type.enum";
 import { Layout } from "@tempradar/layout/layouts.enum";
+import { ApiConfiguration } from "@tempradar/core/environment/api-configuration.model";
 
 export class EnvironmentConfig {
   /**
@@ -16,6 +17,11 @@ export class EnvironmentConfig {
    * The default layout to use throughout the applicaiton.
    */
   public defaultLayout = Layout.Navbar;
+
+  /**
+   * Represents an API configuration.
+   */
+  public api = new ApiConfiguration();
 
   /**
    * Build a new environment configuration using {@link initial initial parameters}.
