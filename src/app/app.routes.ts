@@ -18,6 +18,7 @@ export const routes: Routes = [
       {
         path: '',
         canActivate: [hasAuthenticationSessionGuard],
+        runGuardsAndResolvers: "always",
         children: [
           { path: "home", loadChildren: () => import("@tempradar/modules/home/home.module").then(m => m.HomeModule) },
           { path: 'auth/sign-out', loadChildren: () => import("@tempradar/modules/auth/sign-out/sign-out.module").then(m => m.SignOutModule) },
@@ -28,6 +29,7 @@ export const routes: Routes = [
       {
         path: '',
         canActivate: [withoutAuthenticationSessionGuard],
+        runGuardsAndResolvers: "always",
         children: [
           { path: 'auth/sign-up', loadChildren: () => import("@tempradar/modules/auth/sign-up/sign-up.module").then(m => m.SignUpModule) },
           { path: 'auth/sign-in', loadChildren: () => import("@tempradar/modules/auth/sign-in/sign-in.module").then(m => m.SignInModule) },
