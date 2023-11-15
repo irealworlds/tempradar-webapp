@@ -43,7 +43,7 @@ export class IdentityService {
    */
   signOut(): Observable<void> {
     const endpointUri = new URL('/AuthSessions/Current', this._environment.api.baseUri);
-    return this._http.post<void>(endpointUri.toString(), {}).pipe(
+    return this._http.delete<void>(endpointUri.toString()).pipe(
       tap(() => this.currentIdentity.set(null))
     );
   }
