@@ -25,7 +25,7 @@ export class IdentityService {
    * @returns {Observable<Identity|null>} An observable that emits the identity information.
    */
   fetchIdentityInfo(): Observable<Identity|null> {
-    const endpointUri = new URL('/manage/info', this._environment.api.baseUri);
+    const endpointUri = new URL('/Identities/Current', this._environment.api.baseUri);
     return this._http.get<Identity|null>(endpointUri.toString(), {
       headers: {
         'Accept': 'application/json'

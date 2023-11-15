@@ -26,8 +26,8 @@ export class SignUpService {
    * Sends a POST request to the specified endpoint for user registration.
    */
   public sendRequest(data: SignUpRequest): Observable<void> {
-    const endpointUri = this._environment.api.baseUri + '/register';
-    return this._http.post<void>(endpointUri, data).pipe(
+    const endpointUri = new URL('/Identities', this._environment.api.baseUri);
+    return this._http.post<void>(endpointUri.toString(), data).pipe(
       switchMap(() => this._signInService.sendRequest(data.toSignInRequest()).pipe(map(() => {})))
     );
   }

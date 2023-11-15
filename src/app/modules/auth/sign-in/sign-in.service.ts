@@ -26,9 +26,7 @@ export class SignInService {
    * Sends a POST request to the specified endpoint for user registration.
    */
   public sendRequest(data: SignInRequest): Observable<void> {
-    const endpointUri = new URL('login', this._environment.api.baseUri);
-    endpointUri.searchParams.append('useCookies', 'true');
-    endpointUri.searchParams.append('useSessionCookies', 'true');
+  const endpointUri = new URL('/AuthSessions', this._environment.api.baseUri);
     return this._http.post<void>(endpointUri.toString(), data).pipe(
       switchMap(() => this._identityService.fetchIdentityInfo().pipe(map((() => {}))))
     );
