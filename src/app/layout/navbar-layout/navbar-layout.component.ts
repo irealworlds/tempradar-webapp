@@ -2,11 +2,14 @@ import { Component, ElementRef, HostListener, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { animate, state, style, transition, trigger } from "@angular/animations";
+import { IdentityService } from "@tempradar/core/identity/services/identity.service";
+import { lastValueFrom } from "rxjs";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: 'app-navbar-layout',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive, MatButtonModule],
   templateUrl: './navbar-layout.component.html',
   animations: [
     trigger('dropdownAnimation', [
@@ -33,6 +36,8 @@ export class NavbarLayoutComponent {
   @ViewChild('profileDropdownContainer')
   profileDropdownContainer?: ElementRef<HTMLDivElement>;
 
+  currentIdentity$ = this._identityService.currentIdentity;
+
   navbarItems = [
     {
       name: $localize `Home`,
@@ -42,6 +47,11 @@ export class NavbarLayoutComponent {
 
   mobileMenuOpen = false;
   userDropdownOpen = false;
+
+  constructor(
+    private readonly _identityService: IdentityService
+  ) {
+  }
 
   /**
    * Close the profile dropdown when the user clicks outside of it.
@@ -53,5 +63,14 @@ export class NavbarLayoutComponent {
     if (target && !this.profileDropdownContainer?.nativeElement.contains(target as Node)) {
       this.userDropdownOpen = false;
     }
+  }
+
+  /**
+   * Signs out the user.
+   *
+   * @returns {Promise<void>} A Promise that resolves when the sign-out process is complete.
+   */
+  async signOut(): Promise<void> {
+    return await lastValueFrom(this._identityService.signOut());
   }
 }

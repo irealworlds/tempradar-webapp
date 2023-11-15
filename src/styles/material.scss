@@ -2,8 +2,41 @@
 
 @include mat.core();
 
-$primary-palette: mat.$indigo-palette;
+$primary-palette: (
+  50: #f1fbea,
+  100: #def5d2,
+  200: #c1ebab,
+  300: #99dc7a,
+  400: #76cb50,
+  500: #52a72f,
+  600: #408c24,
+  700: #346b20,
+  800: #2b561e,
+  900: #28491e,
+  950: #11280b,
+  A100: #ffffff,
+  A200: #dde6f3,
+  A400: #6992c9,
+  A700: #38649d,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: black,
+    A700: white,
+  )
+);
 $accent-palette: mat.$pink-palette;
+
 
 // Define a dark theme
 $dark-theme: mat.define-dark-theme((
@@ -32,4 +65,46 @@ $light-theme: mat.define-light-theme((
   // Use the `-color` mixins to only apply color styles without reapplying the same
   // typography and density styles.
   @include mat.all-component-colors($light-theme);
+}
+
+.material-icons {
+  font-family: 'Material Icons Outlined', serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mat-mdc-card-content {
+  @apply px-4 sm:px-6 #{!important};
+  &:last-child {
+    @apply pb-5 sm:pb-6 #{!important};
+  }
+  &:first-child {
+    @apply pt-5 sm:pt-6 #{!important};
+  }
+}
+.mat-mdc-card-header {
+  @apply px-4 pt-5 sm:px-6 sm:pt-6 pb-0 #{!important};
+}
+.mat-mdc-card-actions {
+  @apply px-4 pb-5 sm:px-6 sm:pb-6 pt-0 #{!important};
+  &:first-child {
+    @apply pt-5 sm:pt-6 #{!important};
+  }
+}
+
+html {
+  --mdc-elevated-card-container-shape: 0.5rem;
+
+  @media (prefers-color-scheme: dark) {
+    --mdc-elevated-card-container-color: #333333;
+  }
 }
