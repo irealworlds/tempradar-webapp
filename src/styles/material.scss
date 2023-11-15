@@ -2,8 +2,41 @@
 
 @include mat.core();
 
-$primary-palette: mat.$indigo-palette;
+$primary-palette: (
+  50: #f1fbea,
+  100: #def5d2,
+  200: #c1ebab,
+  300: #99dc7a,
+  400: #76cb50,
+  500: #52a72f,
+  600: #408c24,
+  700: #346b20,
+  800: #2b561e,
+  900: #28491e,
+  950: #11280b,
+  A100: #ffffff,
+  A200: #dde6f3,
+  A400: #6992c9,
+  A700: #38649d,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: black,
+    A700: white,
+  )
+);
 $accent-palette: mat.$pink-palette;
+
 
 // Define a dark theme
 $dark-theme: mat.define-dark-theme((
