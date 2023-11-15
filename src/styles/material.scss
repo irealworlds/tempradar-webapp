@@ -66,3 +66,18 @@ $light-theme: mat.define-light-theme((
   // typography and density styles.
   @include mat.all-component-colors($light-theme);
 }
+
+.material-icons {
+  font-family: 'Material Icons Outlined', serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
