@@ -6,6 +6,7 @@ import { SignUpComponent } from "./sign-up.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MatButtonModule } from "@angular/material/button";
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ]
 })
 export class SignUpModule { }

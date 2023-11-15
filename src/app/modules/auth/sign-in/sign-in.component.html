@@ -1,60 +1,62 @@
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-    <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900" i18n>
+    <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-200" i18n>
       Sign into your account
     </h2>
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-    <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-      <form [formGroup]="signInForm" (ngSubmit)="signIn()" class="space-y-6 flex flex-col">
-        <!-- E-mail address -->
-        <mat-form-field>
-          <mat-label i18n>E-mail address</mat-label>
-          <input type="email" matInput [formControl]="signInForm.controls.email" autocomplete="email">
-          @for (error of signInForm.controls.email.errors ?? {} | keyvalue; track $index) {
-            <mat-error>{{ error.key }}</mat-error>
-          }
-        </mat-form-field>
-
-        <!-- Password -->
-        <mat-form-field>
-          <mat-label i18n>Password</mat-label>
-          <input type="password" matInput [formControl]="signInForm.controls.password" autocomplete="current-password">
-          @for (error of signInForm.controls.password.errors ?? {} | keyvalue; track $index) {
-            <mat-error>{{ error.key }}</mat-error>
-          }
-        </mat-form-field>
-
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <input [disabled]="signInForm.disabled" id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-            <label for="remember-me" class="ml-3 block text-sm leading-6 text-gray-900">Remember me</label>
-          </div>
-
-          <div class="text-sm leading-6">
-            <a routerLink="/auth/forgot-password" class="font-semibold text-indigo-600 hover:text-indigo-500" i18n>
-              Forgot password?
-            </a>
-          </div>
-        </div>
-
-        <div>
-          <button type="submit" mat-flat-button color="primary" class="w-full" [disabled]="signInForm.disabled">
-            @if(saving) {
-              <ng-container i18n>Signing in...</ng-container>
-            } @else {
-              <ng-container i18n>Sign in</ng-container>
+    <mat-card>
+      <mat-card-content class="px-6 py-12 sm:px-12">
+        <form [formGroup]="signInForm" (ngSubmit)="signIn()" class="space-y-6 flex flex-col">
+          <!-- E-mail address -->
+          <mat-form-field>
+            <mat-label i18n>E-mail address</mat-label>
+            <input type="email" matInput [formControl]="signInForm.controls.email" autocomplete="email">
+            @for (error of signInForm.controls.email.errors ?? {} | keyvalue; track $index) {
+              <mat-error>{{ error.key }}</mat-error>
             }
-          </button>
-        </div>
-      </form>
-    </div>
+          </mat-form-field>
 
-    <p class="mt-10 text-center text-sm text-gray-500" i18n>
+          <!-- Password -->
+          <mat-form-field>
+            <mat-label i18n>Password</mat-label>
+            <input type="password" matInput [formControl]="signInForm.controls.password" autocomplete="current-password">
+            @for (error of signInForm.controls.password.errors ?? {} | keyvalue; track $index) {
+              <mat-error>{{ error.key }}</mat-error>
+            }
+          </mat-form-field>
+
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input [disabled]="signInForm.disabled" id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+              <label for="remember-me" class="ml-3 block text-sm leading-6 text-gray-900 dark:text-current">Remember me</label>
+            </div>
+
+            <div class="text-sm leading-6">
+              <a routerLink="/auth/forgot-password" class="font-semibold text-primary-500 hover:text-primary-600" i18n>
+                Forgot password?
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" mat-flat-button color="primary" class="w-full" [disabled]="signInForm.disabled">
+              @if(saving) {
+                <ng-container i18n>Signing in...</ng-container>
+              } @else {
+                <ng-container i18n>Sign in</ng-container>
+              }
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <p class="mt-10 text-center text-sm text-gray-500 dark:text-gray-300" i18n>
       Not a member?
-      <a routerLink="/auth/sign-up" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+      <a routerLink="/auth/sign-up" class="font-semibold leading-6 text-primary-500 hover:text-primary-600">
         Create a new account
       </a>
     </p>

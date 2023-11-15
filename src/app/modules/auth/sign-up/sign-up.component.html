@@ -1,65 +1,67 @@
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md">
     <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-    <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900" i18n>
+    <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-200" i18n>
       Create a new account
     </h2>
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-    <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-      <form [formGroup]="signUpForm" (ngSubmit)="saveAccount()" class="space-y-6 flex flex-col">
-        <!-- First name -->
-        <mat-form-field>
-          <mat-label i18n>First name</mat-label>
-          <input type="text" matInput [formControl]="signUpForm.controls.firstName" autocomplete="given-name">
-          @for (error of signUpForm.controls.firstName.errors ?? {} | keyvalue; track $index) {
-            <mat-error>{{ error.key }}</mat-error>
-          }
-        </mat-form-field>
-
-        <!-- Last name -->
-        <mat-form-field>
-          <mat-label i18n>Last name</mat-label>
-          <input type="text" matInput [formControl]="signUpForm.controls.lastName" autocomplete="family-name">
-          @for (error of signUpForm.controls.lastName.errors ?? {} | keyvalue; track $index) {
-            <mat-error>{{ error.key }}</mat-error>
-          }
-        </mat-form-field>
-
-        <!-- E-mail address -->
-        <mat-form-field>
-          <mat-label i18n>E-mail address</mat-label>
-          <input type="email" matInput [formControl]="signUpForm.controls.email" autocomplete="email">
-          @for (error of signUpForm.controls.email.errors ?? {} | keyvalue; track $index) {
-            <mat-error>{{ error.key }}</mat-error>
-          }
-        </mat-form-field>
-
-        <!-- Password -->
-        <mat-form-field>
-          <mat-label i18n>Password</mat-label>
-          <input type="password" matInput [formControl]="signUpForm.controls.password" autocomplete="new-password">
-          @for (error of signUpForm.controls.password.errors ?? {} | keyvalue; track $index) {
-            <mat-error>{{ error.key }}</mat-error>
-          }
-        </mat-form-field>
-
-        <div>
-          <button type="submit" mat-flat-button color="primary" class="w-full" [disabled]="signUpForm.disabled">
-            @if(saving) {
-              <ng-container i18n>Signing up...</ng-container>
-            } @else {
-              <ng-container i18n>Sign up</ng-container>
+    <mat-card>
+      <mat-card-content class="px-6 py-12 sm:px-12">
+        <form [formGroup]="signUpForm" (ngSubmit)="saveAccount()" class="space-y-6 flex flex-col">
+          <!-- First name -->
+          <mat-form-field>
+            <mat-label i18n>First name</mat-label>
+            <input type="text" matInput [formControl]="signUpForm.controls.firstName" autocomplete="given-name">
+            @for (error of signUpForm.controls.firstName.errors ?? {} | keyvalue; track $index) {
+              <mat-error>{{ error.key }}</mat-error>
             }
-          </button>
-        </div>
-      </form>
-    </div>
+          </mat-form-field>
 
-    <p class="mt-10 text-center text-sm text-gray-500" i18n>
+          <!-- Last name -->
+          <mat-form-field>
+            <mat-label i18n>Last name</mat-label>
+            <input type="text" matInput [formControl]="signUpForm.controls.lastName" autocomplete="family-name">
+            @for (error of signUpForm.controls.lastName.errors ?? {} | keyvalue; track $index) {
+              <mat-error>{{ error.key }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- E-mail address -->
+          <mat-form-field>
+            <mat-label i18n>E-mail address</mat-label>
+            <input type="email" matInput [formControl]="signUpForm.controls.email" autocomplete="email">
+            @for (error of signUpForm.controls.email.errors ?? {} | keyvalue; track $index) {
+              <mat-error>{{ error.key }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Password -->
+          <mat-form-field>
+            <mat-label i18n>Password</mat-label>
+            <input type="password" matInput [formControl]="signUpForm.controls.password" autocomplete="new-password">
+            @for (error of signUpForm.controls.password.errors ?? {} | keyvalue; track $index) {
+              <mat-error>{{ error.key }}</mat-error>
+            }
+          </mat-form-field>
+
+          <div>
+            <button type="submit" mat-flat-button color="primary" class="w-full" [disabled]="signUpForm.disabled">
+              @if(saving) {
+                <ng-container i18n>Signing up...</ng-container>
+              } @else {
+                <ng-container i18n>Sign up</ng-container>
+              }
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <p class="mt-10 text-center text-sm text-gray-500 dark:text-gray-300" i18n>
       Already a member?
-      <a routerLink="/auth/sign-in" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+      <a routerLink="/auth/sign-in" class="font-semibold leading-6 text-primary-500 hover:text-primary-600">
         Sign into your account
       </a>
     </p>
