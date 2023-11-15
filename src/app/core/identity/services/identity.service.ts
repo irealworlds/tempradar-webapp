@@ -42,7 +42,7 @@ export class IdentityService {
    * @returns {Observable<void>}
    */
   signOut(): Observable<void> {
-    const endpointUri = new URL('/signout', this._environment.api.baseUri);
+    const endpointUri = new URL('/AuthSessions/Current', this._environment.api.baseUri);
     return this._http.post<void>(endpointUri.toString(), {}).pipe(
       tap(() => this.currentIdentity.set(null))
     );
