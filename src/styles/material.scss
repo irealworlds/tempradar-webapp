@@ -81,3 +81,26 @@ $light-theme: mat.define-light-theme((
   direction: ltr;
   -webkit-font-smoothing: antialiased;
 }
+
+.mat-mdc-card-content {
+  @apply px-4 sm:px-6 #{!important};
+  &:last-child {
+    @apply pb-5 sm:pb-6 #{!important};
+  }
+  &:first-child {
+    @apply pt-5 sm:pt-6 #{!important};
+  }
+}
+.mat-mdc-card-header {
+  @apply px-4 pt-5 sm:px-6 sm:pt-6 pb-0 #{!important};
+}
+.mat-mdc-card-actions {
+  @apply px-4 pb-5 sm:px-6 sm:pb-6 pt-0 #{!important};
+  &:first-child {
+    @apply pt-5 sm:pt-6 #{!important};
+  }
+}
+
+html {
+  --mdc-elevated-card-container-shape: 0.5rem;
+}
