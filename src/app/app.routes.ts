@@ -19,7 +19,8 @@ export const routes: Routes = [
         path: '',
         canActivate: [hasAuthenticationSessionGuard],
         children: [
-          { path: "home", loadChildren: () => import("@tempradar/modules/home/home.module").then(m => m.HomeModule) }
+          { path: "home", loadChildren: () => import("@tempradar/modules/home/home.module").then(m => m.HomeModule) },
+          { path: 'auth/sign-out', loadChildren: () => import("@tempradar/modules/auth/sign-out/sign-out.module").then(m => m.SignOutModule) },
         ]
       },
 
