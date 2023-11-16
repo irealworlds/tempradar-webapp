@@ -7,7 +7,7 @@ import {
 
 export const routes: Routes = [
   // Redirect requests to '/' to the home page
-  { path: '', redirectTo: 'home', pathMatch: "full" },
+  { path: '', redirectTo: 'sources', pathMatch: "full" },
 
   // Application routes
   {
@@ -22,6 +22,7 @@ export const routes: Routes = [
         children: [
           { path: "home", loadChildren: () => import("@tempradar/modules/home/home.module").then(m => m.HomeModule) },
           { path: 'auth/sign-out', loadChildren: () => import("@tempradar/modules/auth/sign-out/sign-out.module").then(m => m.SignOutModule) },
+          { path: "sources", loadChildren: () => import("@tempradar/modules/pinned-sources/pinned-sources.module").then(m => m.PinnedSourcesModule) },
         ]
       },
 
