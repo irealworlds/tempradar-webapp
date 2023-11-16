@@ -30,6 +30,9 @@
       ],
       "@tempradar/environments/*": [
         "environments/*"
+      ],
+      "@irealworlds/toast-notifications": [
+        "../dist/toast-notifications"
       ]
     }
   },
@@ -39,4 +42,7 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
+  "exclude": [
+    "./projects/**/*"
+  ]
 }
