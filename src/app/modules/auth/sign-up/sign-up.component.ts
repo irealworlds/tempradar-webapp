@@ -5,6 +5,7 @@ import { SignUpRequest } from "@tempradar/modules/auth/sign-up/sign-up.request";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ValidationErrorService } from "@tempradar/core/forms/validation-error.service";
 import { Router } from "@angular/router";
+import { ToastNotification, ToastService, ToastType } from "@irealworlds/toast-notifications";
 
 @Component({
   selector: 'app-sign-up',
@@ -26,11 +27,13 @@ export class SignUpComponent {
    * @param _signUpService
    * @param _validationErrorService
    * @param _router
+   * @param _toastService
    */
   constructor(
     private readonly _signUpService: SignUpService,
     private readonly _validationErrorService: ValidationErrorService,
     private readonly _router: Router,
+    private readonly _toastService: ToastService
   ) {
   }
 
@@ -79,6 +82,11 @@ export class SignUpComponent {
       this._signUpService.sendRequest(request).subscribe({
         next: async () => {
           this.saving = false;
+          this._toastService.showToast(new ToastNotification({
+            title: $localize `Signed up successfully`,
+            message: $localize `Your account has been created successfully!`,
+            type: ToastType.Success
+          }));
           await this._router.navigate(['/']);
         },
         error: (response: HttpErrorResponse) => {
@@ -87,6 +95,12 @@ export class SignUpComponent {
           if (response.status === 400) {
             this._validationErrorService.applyApiValidationErrorsOnControl(response.error.errors, this.signUpForm);
           }
+
+          this._toastService.showToast(new ToastNotification({
+            title: $localize `An error has occurred`,
+            message: $localize `We could not create an account with the data you provided. Please try again!`,
+            type: ToastType.Error
+          }));
         }
       });
     }

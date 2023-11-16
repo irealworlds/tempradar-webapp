@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { SignInService } from "@tempradar/modules/auth/sign-in/sign-in.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { SignInRequest } from "@tempradar/modules/auth/sign-in/sign-in.request";
+import { ToastNotification, ToastService, ToastType } from "@irealworlds/toast-notifications";
 
 @Component({
   selector: 'app-sign-in',
@@ -24,11 +25,13 @@ export class SignInComponent {
    * @param _signInService
    * @param _validationErrorService
    * @param _router
+   * @param _toastService
    */
   constructor(
     private readonly _signInService: SignInService,
     private readonly _validationErrorService: ValidationErrorService,
     private readonly _router: Router,
+    private readonly _toastService: ToastService
   ) {
   }
 
@@ -71,6 +74,11 @@ export class SignInComponent {
       this._signInService.sendRequest(request).subscribe({
         next: async () => {
           this.saving = false;
+          this._toastService.showToast(new ToastNotification({
+            title: $localize `Signed in successfully`,
+            message: $localize `You have signed into your account successfully!`,
+            type: ToastType.Success
+          }));
           await this._router.navigate(['/']);
         },
         error: (response: HttpErrorResponse) => {
@@ -79,6 +87,12 @@ export class SignInComponent {
           if (response.status === 400) {
             this._validationErrorService.applyApiValidationErrorsOnControl(response.error.errors, this.signInForm);
           }
+
+          this._toastService.showToast(new ToastNotification({
+            title: $localize `An error has occurred`,
+            message: $localize `You have not been signed into your account. Please try again!`,
+            type: ToastType.Error
+          }));
         }
       });
     }

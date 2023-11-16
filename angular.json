@@ -25,7 +25,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/tempradar",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "localize": true,
@@ -119,6 +119,39 @@
             ],
             "scripts": [],
             "karmaConfig": "karma.conf.js"
+          }
+        }
+      }
+    },
+    "toast-notifications": {
+      "projectType": "library",
+      "root": "projects/toast-notifications",
+      "sourceRoot": "projects/toast-notifications/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/toast-notifications/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/toast-notifications/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/toast-notifications/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/toast-notifications/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
