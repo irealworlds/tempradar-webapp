@@ -23,6 +23,7 @@ export const routes: Routes = [
           { path: "home", loadChildren: () => import("@tempradar/modules/home/home.module").then(m => m.HomeModule) },
           { path: 'auth/sign-out', loadChildren: () => import("@tempradar/modules/auth/sign-out/sign-out.module").then(m => m.SignOutModule) },
           { path: "sources", loadChildren: () => import("@tempradar/modules/pinned-sources/pinned-sources.module").then(m => m.PinnedSourcesModule) },
+          { path: "cities", loadChildren: () => import("@tempradar/modules/cities/cities.module").then(m => m.CitiesModule) },
         ]
       },
 
