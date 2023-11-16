@@ -1,15 +1,16 @@
 import { Component, ElementRef, HostListener, ViewChild } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { IdentityService } from "@tempradar/core/identity/services/identity.service";
 import { lastValueFrom } from "rxjs";
 import { MatButtonModule } from "@angular/material/button";
+import { LogoIconComponent } from "@tempradar/modules/common/logo/logo-icon/logo-icon.component";
 
 @Component({
   selector: 'app-navbar-layout',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, MatButtonModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive, MatButtonModule, NgOptimizedImage, LogoIconComponent],
   templateUrl: './navbar-layout.component.html',
   animations: [
     trigger('dropdownAnimation', [

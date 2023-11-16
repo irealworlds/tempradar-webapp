@@ -8,21 +8,23 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
+import { LogoIconComponent } from "@tempradar/modules/common/logo/logo-icon/logo-icon.component";
 
 
 @NgModule({
   declarations: [
     SignInComponent
   ],
-  imports: [
-    CommonModule,
-    SignInRoutingModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatCardModule
-  ]
+    imports: [
+        CommonModule,
+        SignInRoutingModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatCardModule,
+        LogoIconComponent
+    ]
 })
 export class SignInModule { }
