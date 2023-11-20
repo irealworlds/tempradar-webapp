@@ -5,4 +5,5 @@ export class City implements IPinnedSource {
   name?: string;
   latitude?: string;
   longitude?: string;
+  createdAt?: string;
 }

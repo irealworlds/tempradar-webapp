@@ -4,8 +4,11 @@ import { CommonModule } from "@angular/common";
 import { PinnedSourcesRoutingModule } from "./pinned-sources-routing.module";
 import { PinnedSourcesComponent } from "@tempradar/modules/pinned-sources/pinned-sources.component";
 import { MatCardModule } from "@angular/material/card";
-import { NoSourcesComponent } from "@tempradar/modules/pinned-sources/no-sources/no-sources.component";
+import {
+  CreateSourceCardComponent
+} from "@tempradar/modules/pinned-sources/create-source-card/create-source-card.component";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
+import { PinnedCityCardComponent } from "@tempradar/modules/pinned-sources/pinned-city-card/pinned-city-card.component";
 
 
 @NgModule({
@@ -16,8 +19,9 @@ import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
     CommonModule,
     PinnedSourcesRoutingModule,
     MatCardModule,
-    NoSourcesComponent,
-    NgxSkeletonLoaderModule
+    CreateSourceCardComponent,
+    NgxSkeletonLoaderModule,
+    PinnedCityCardComponent
   ]
 })
 export class PinnedSourcesModule { }

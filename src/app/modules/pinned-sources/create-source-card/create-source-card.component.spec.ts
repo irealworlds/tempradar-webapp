@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { NoSourcesComponent } from "./no-sources.component";
+import { CreateSourceCardComponent } from "./create-source-card.component";
 
 describe('NoSourcesComponent', () => {
-  let component: NoSourcesComponent;
-  let fixture: ComponentFixture<NoSourcesComponent>;
+  let component: CreateSourceCardComponent;
+  let fixture: ComponentFixture<CreateSourceCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoSourcesComponent]
+      imports: [CreateSourceCardComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NoSourcesComponent);
+    fixture = TestBed.createComponent(CreateSourceCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
