@@ -37,8 +37,8 @@
           </svg>
         </dt>
         <dd class="text-sm leading-6 text-gray-500 dark:text-gray-400">
-          <time [attr.datetime]="city!.createdAt | date:'Y-m-d'">
-            {{ city!.createdAt | date }}
+          <time [attr.datetime]="city!.createdAt | date:'Y-m-d'" class="capitalize">
+            {{ city!.createdAt | date:'fullDate' }}
           </time>
         </dd>
       </div>
