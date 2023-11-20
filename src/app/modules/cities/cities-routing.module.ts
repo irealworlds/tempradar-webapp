@@ -5,6 +5,10 @@ const routes: Routes = [
   {
     path: "create",
     loadComponent: () => import("@tempradar/modules/cities/city-create/city-create.component").then(c => c.CityCreateComponent),
+  },
+  {
+    path: "details",
+    loadChildren: () => import("@tempradar/modules/cities/city-details/city-details.module").then(m => m.CityDetailsModule),
   }
 ];
 

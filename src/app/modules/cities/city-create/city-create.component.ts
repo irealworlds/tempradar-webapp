@@ -13,8 +13,8 @@ import { ToastNotification, ToastService, ToastType } from "@irealworlds/toast-n
 import { filter, firstValueFrom, Subject } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AppState } from "@tempradar/core/state/app.state";
-import { createPinnedCity } from "@tempradar/core/state/pinned-cities/pinned-city.actions";
 import { selectPinnedCityCreationStatus } from "@tempradar/core/state/pinned-cities/pinned-city.selectors";
+import { createPinnedCity } from "@tempradar/core/state/pinned-cities/actions/create-pinned-city.actions";
 
 @Component({
   selector: 'app-city-create',
@@ -95,7 +95,8 @@ export class CityCreateComponent implements OnInit, OnDestroy {
             filter(status => ["success", "failure"].includes(status))
           )
       );
-      console.debug(result);
+      console.debug('result: ', result);
+
       switch (result) {
         case "success": {
           this._toastService.showToast(new ToastNotification({
