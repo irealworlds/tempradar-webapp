@@ -25,6 +25,14 @@
                   i18n>
             Delete
           </button>
+          <button type="button"
+                  (click)="refreshWeatherData()"
+                  mat-flat-button color="primary"
+                  class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300"
+                  [disabled]="deleting$ | async"
+                  i18n>
+            Refresh
+          </button>
         </div>
       </mat-card-content>
     </mat-card>

@@ -179,4 +179,20 @@ export class CityDetailsComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  /**
+   * Refreshes the weather data for the current city.
+   *
+   * @return {Promise<void>} A Promise that resolves when the weather data is refreshed.
+   * @throws {Error} If the city is not set on the component.
+   */
+  async refreshWeatherData(): Promise<void> {
+    const city = await firstValueFrom(this.city$);
+
+    if (!city?.id) {
+      throw new Error("City not set on component");
+    }
+
+    this._store.dispatch(fetchCityWeather({ id: city.id }));
+  }
 }
