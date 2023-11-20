@@ -5,13 +5,17 @@ import {
   selectPinnedCityDeletionStatus,
   selectPinnedCityDetails
 } from "@tempradar/core/state/pinned-cities/pinned-city.selectors";
-import { filter, firstValueFrom, map, Subject, takeUntil } from "rxjs";
+import { filter, firstValueFrom, map, Observable, Subject, takeUntil } from "rxjs";
 import { ToastNotification, ToastService, ToastType } from "@irealworlds/toast-notifications";
 import { ActivatedRoute, Router } from "@angular/router";
 import { deletePinnedCity } from "@tempradar/core/state/pinned-cities/actions/delete-pinned-city.actions";
 import { loadPinnedCityDetails } from "@tempradar/core/state/pinned-cities/actions/pinned-city-details.actions";
 import { ColorSchemeService } from "@tempradar/core/color-scheme/color-scheme.service";
 import { toObservable } from "@angular/core/rxjs-interop";
+import { fetchCityWeather } from "@tempradar/core/state/pinned-city-weather/pinned-city-weather.actions";
+import {
+  selectLoadedCityWeatherDetails
+} from "@tempradar/core/state/pinned-city-weather/pinned-city-weather.selectors";
 
 @Component({
   selector: 'app-city-details',
@@ -19,8 +23,11 @@ import { toObservable } from "@angular/core/rxjs-interop";
 })
 export class CityDetailsComponent implements OnInit, OnDestroy {
   city$ = this._store.select(selectPinnedCityDetails);
+  weather$ = this._store.select(selectLoadedCityWeatherDetails);
 
   deleting$ = this._store.select(selectPinnedCityDeletionStatus).pipe(map(s => s === "loading"));
+
+  systemScheme$: Observable<"light"|"dark"|undefined>;
 
   chartOptions = {
     animationEnabled: true,
@@ -100,16 +107,26 @@ export class CityDetailsComponent implements OnInit, OnDestroy {
     private readonly _activatedRoute: ActivatedRoute,
     private readonly _colorSchemeService: ColorSchemeService,
   ) {
+    this.systemScheme$ = toObservable(this._colorSchemeService.systemPreference);
   }
 
   /** @inheritDoc */
   ngOnInit(): void {
     this._store.dispatch(loadPinnedCityDetails({ id: this._activatedRoute.snapshot.paramMap.get('cityKey')! }));
-    toObservable(this._colorSchemeService.systemPreference).pipe(
+
+    this.systemScheme$.pipe(
       takeUntil(this._unsubscribeAll)
     ).subscribe(preference => {
-      this.chartOptions.theme = this._colorSchemeService.systemPreference() === "dark" ? "dark2" : "light2";
-    })
+      this.chartOptions.theme = preference === "dark" ? "dark2" : "light2";
+    });
+
+    this.city$.pipe(
+      takeUntil(this._unsubscribeAll)
+    ).subscribe(city => {
+      if (city?.id) {
+        this._store.dispatch(fetchCityWeather({ id: city.id }))
+      }
+    });
   }
 
   /** @inheritDoc */
