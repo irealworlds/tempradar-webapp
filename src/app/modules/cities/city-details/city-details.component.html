@@ -60,7 +60,7 @@
             </p>
           </div>
           <div class="px-4 py-6 sm:px-6 lg:px-8">
-            <p class="text-sm font-medium leading-6 text-gray-400">UV Index</p>
+            <p class="text-sm font-medium leading-6 text-gray-400" i18n>UV Index</p>
             <p class="mt-2 flex items-baseline gap-x-2">
               <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
                 {{ weather.uv }}
@@ -74,6 +74,7 @@
         <mat-card class="group overflow-hidden">
           <mat-card-content class="relative">
             <mat-icon fontIcon="error" class="absolute right-10 top-1/2 transform -translate-y-1/2 scale-[4] group-hover:scale-[5] opacity-5 transition-transform duration-500"></mat-icon>
+
             <mat-card-subtitle i18n>
               US - EPA standard
             </mat-card-subtitle>
@@ -155,10 +156,10 @@
       <div class="grid lg:grid-cols-2 gap-6">
         <mat-card>
           <mat-card-header>
-            <mat-card-subtitle>
+            <mat-card-subtitle i18n>
               Statistics
             </mat-card-subtitle>
-            <mat-card-title>
+            <mat-card-title i18n>
               Temperature History
             </mat-card-title>
           </mat-card-header>
@@ -168,10 +169,10 @@
         </mat-card>
         <mat-card>
           <mat-card-header>
-            <mat-card-subtitle>
+            <mat-card-subtitle i18n>
               Data
             </mat-card-subtitle>
-            <mat-card-title>
+            <mat-card-title i18n>
               Air Quality
             </mat-card-title>
           </mat-card-header>
@@ -179,42 +180,42 @@
             <div class="mt-6 border-t border-gray-100 dark:border-gray-500">
               <dl class="divide-y divide-gray-100 dark:divide-gray-500">
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Carbon monoxide (CO)</dt>
+                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Carbon monoxide (CO)</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
                     {{ weather.co | number:'1.2-2' }}
                     μg/m<sup>3</sup>
                   </dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Ozone (O3)</dt>
+                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Ozone (O3)</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
                     {{ weather.o3 | number:'1.2-2' }}
                     μg/m<sup>3</sup>
                   </dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Nitrogen dioxide (NO2)</dt>
+                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Nitrogen dioxide (NO2)</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
                     {{ weather.nO2 | number:'1.2-2' }}
                     μg/m<sup>3</sup>
                   </dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">Sulphur dioxide (SO2)</dt>
+                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Sulphur dioxide (SO2)</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
                     {{ weather.sO2 | number:'1.2-2' }}
                     μg/m<sup>3</sup>
                   </dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">PM 2.5</dt>
+                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>PM 2.5</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
                     {{ weather.pM2_5 | number:'1.2-2' }}
                     μg/m<sup>3</sup>
                   </dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">PM 10</dt>
+                  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>PM 10</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
                     {{ weather.pM10 | number:'1.2-2' }}
                     μg/m<sup>3</sup>
