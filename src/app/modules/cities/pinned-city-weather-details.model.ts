@@ -1,15 +1,15 @@
 export interface PinnedCityWeatherDetails {
-  tempC: number;
-  feelsLikeC: number;
-  windKph: number;
-  pressureMb: number;
-  uv: number;
-  co: number;
-  nO2: number;
-  o3: number;
-  sO2: number;
-  pM2_5: number;
-  pM10: number;
-  usepaIndex: number;
+  temperature: number;
+  feelsLikeTemperature: number;
+  windSpeed: number;
+  atmosphericPressure: number;
+  ultravioletIndex: number;
+  carbonMonoxide: number;
+  nitrogenDioxide: number;
+  ozone: number;
+  sulphurDioxide: number;
+  pm25: number;
+  pm10: number;
+  usEpaIndex: number;
   gbDefraIndex: number;
 }

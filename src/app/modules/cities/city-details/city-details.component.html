@@ -44,7 +44,7 @@
             <p class="text-sm font-medium leading-6 text-gray-400" i18n>Temperature</p>
             <p class="mt-2 flex items-baseline gap-x-2">
               <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
-                {{ weather.tempC }}
+                {{ weather.temperature }}
               </span>
               <span class="text-sm text-gray-400">&deg;C</span>
             </p>
@@ -53,7 +53,7 @@
             <p class="text-sm font-medium leading-6 text-gray-400" i18n>Wind Speed</p>
             <p class="mt-2 flex items-baseline gap-x-2">
               <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
-                {{ weather.windKph }}
+                {{ weather.windSpeed }}
               </span>
               <span class="text-sm text-gray-400">km/h</span>
             </p>
@@ -62,7 +62,7 @@
             <p class="text-sm font-medium leading-6 text-gray-400" i18n>Pressure</p>
             <p class="mt-2 flex items-baseline gap-x-2">
               <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
-                {{ weather.pressureMb }}
+                {{ weather.atmosphericPressure }}
               </span>
               <span class="text-sm text-gray-400">mb</span>
             </p>
@@ -71,7 +71,7 @@
             <p class="text-sm font-medium leading-6 text-gray-400" i18n>UV Index</p>
             <p class="mt-2 flex items-baseline gap-x-2">
               <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
-                {{ weather.uv }}
+                {{ weather.ultravioletIndex }}
               </span>
             </p>
           </div>
@@ -87,7 +87,7 @@
               US - EPA standard
             </mat-card-subtitle>
             <mat-card-title>
-              @switch (weather.usepaIndex) {
+              @switch (weather.usEpaIndex) {
                 @case(1) {
                   <span class="text-green-500" i18n>Good</span>
                 }
@@ -121,7 +121,7 @@
               UK Defra Index
             </mat-card-subtitle>
             <mat-card-title>
-              @switch (weather.usepaIndex) {
+              @switch (weather.gbDefraIndex) {
                 @case(1) {
                   <span class="text-green-500" i18n>Low</span>
                 }
@@ -190,42 +190,42 @@
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Carbon monoxide (CO)</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
-                    {{ weather.co | number:'1.2-2' }}
+                    {{ weather.carbonMonoxide | number:'1.2-2' }}
                     μg/m<sup>3</sup>
                   </dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Ozone (O3)</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
-                    {{ weather.o3 | number:'1.2-2' }}
+                    {{ weather.ozone | number:'1.2-2' }}
                     μg/m<sup>3</sup>
                   </dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Nitrogen dioxide (NO2)</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
-                    {{ weather.nO2 | number:'1.2-2' }}
+                    {{ weather.nitrogenDioxide | number:'1.2-2' }}
                     μg/m<sup>3</sup>
                   </dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Sulphur dioxide (SO2)</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
-                    {{ weather.sO2 | number:'1.2-2' }}
+                    {{ weather.sulphurDioxide | number:'1.2-2' }}
                     μg/m<sup>3</sup>
                   </dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>PM 2.5</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
-                    {{ weather.pM2_5 | number:'1.2-2' }}
+                    {{ weather.pm25 | number:'1.2-2' }}
                     μg/m<sup>3</sup>
                   </dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>PM 10</dt>
                   <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
-                    {{ weather.pM10 | number:'1.2-2' }}
+                    {{ weather.pm10 | number:'1.2-2' }}
                     μg/m<sup>3</sup>
                   </dd>
                 </div>
