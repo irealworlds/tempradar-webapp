@@ -4,7 +4,7 @@ import { CanvasJS, CanvasJSAngularChartsModule, CanvasJSChart } from "@canvasjs/
 import { MatCardModule } from "@angular/material/card";
 import { BehaviorSubject, Observable, Subject, takeUntil, tap } from "rxjs";
 import { toObservable } from "@angular/core/rxjs-interop";
-import { ColorSchemeService } from "@tempradar/core/color-scheme/color-scheme.service";
+import { ColorSchemeService, TColorSchemePreference } from "@tempradar/core/color-scheme/color-scheme.service";
 import {
   TCityWeatherHistory
 } from "@tempradar/modules/cities/city-details/city-temperature-history-graph/city-temperature-history.type";
@@ -26,6 +26,23 @@ interface ChartOptions {
   data: any[];
 }
 
+const initialChartOptions: ChartOptions = {
+  animationEnabled: true,
+  exportEnabled: true,
+  zoomEnabled: true,
+  theme: "dark1",
+  toolTip: {
+    shared: true,
+  },
+  axisX:{
+    title: $localize `Date`
+  },
+  axisY: {
+    title: $localize `Temperature`
+  },
+  data: [],
+};
+
 @Component({
   selector: 'app-city-temperature-history-graph',
   standalone: true,
@@ -36,26 +53,16 @@ export class CityTemperatureHistoryGraphComponent implements OnInit, OnChanges, 
   @Input() history?: TCityWeatherHistory;
   chart?: CanvasJSChart;
 
-  systemScheme$: Observable<"light"|"dark"|undefined>;
+  systemScheme$: Observable<TColorSchemePreference>;
 
-  private readonly _chartOptions = new BehaviorSubject<ChartOptions>({
-    animationEnabled: true,
-    exportEnabled: true,
-    zoomEnabled: true,
-    theme: "dark1",
-    toolTip: {
-      shared: true,
-    },
-    axisX:{
-      title: $localize `Date`
-    },
-    axisY: {
-      title: $localize `Temperature`
-    },
-    data: [],
-  });
+  private readonly _chartOptions = new BehaviorSubject<ChartOptions>(initialChartOptions);
   private readonly _unsubscribeAll = new Subject<void>();
 
+  /**
+   * CityTemperatureHistoryGraphComponent constructor method.
+   *
+   * @param _colorSchemeService
+   */
   constructor(
     private readonly _colorSchemeService: ColorSchemeService,
   ) {
@@ -94,11 +101,12 @@ export class CityTemperatureHistoryGraphComponent implements OnInit, OnChanges, 
   ngOnChanges(changes: SimpleChanges): void {
     if ('history' in changes) {
       if (this.history) {
-        this.populateGraph(this.history);
+        this._setChartData(this.history);
       }
     }
   }
 
+  /** @inheritDoc */
   ngAfterViewInit() {
     this.chart = new CanvasJS.Chart("chartContainer", this._chartOptions.getValue());
   }
@@ -115,7 +123,7 @@ export class CityTemperatureHistoryGraphComponent implements OnInit, OnChanges, 
    * @param {TCityWeatherHistory} history - The temperature history of a city.
    * @return {void}
    */
-  populateGraph(history: TCityWeatherHistory): void {
+  private _setChartData(history: TCityWeatherHistory): void {
     // Clear previous data
     const data = [];
 
