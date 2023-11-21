@@ -3,9 +3,10 @@ import { Store } from "@ngrx/store";
 import { AppState } from "@tempradar/core/state/app.state";
 import {
   selectPinnedCityDeletionStatus,
-  selectPinnedCityDetails
+  selectPinnedCityDetails,
+  selectPinnedCityDetailsLoadingStatus
 } from "@tempradar/core/state/pinned-cities/pinned-city.selectors";
-import { filter, firstValueFrom, map, Subject, takeUntil } from "rxjs";
+import { combineLatest, filter, firstValueFrom, map, Subject, takeUntil } from "rxjs";
 import { ToastNotification, ToastService, ToastType } from "@irealworlds/toast-notifications";
 import { ActivatedRoute, Router } from "@angular/router";
 import { deletePinnedCity } from "@tempradar/core/state/pinned-cities/actions/delete-pinned-city.actions";
@@ -15,6 +16,8 @@ import {
   fetchWeatherHistory
 } from "@tempradar/core/state/pinned-city-weather/pinned-city-weather.actions";
 import {
+  selectCityWeatherLoadingStatus,
+  selectHistoryLoadingStatus,
   selectLoadedCityWeatherDetails,
   selectWeatherHistory
 } from "@tempradar/core/state/pinned-city-weather/pinned-city-weather.selectors";
@@ -25,10 +28,20 @@ import {
 })
 export class CityDetailsComponent implements OnInit, OnDestroy {
   city$ = this._store.select(selectPinnedCityDetails);
+  cityLoadingStatus$ = this._store.select(selectPinnedCityDetailsLoadingStatus);
+
   weather$ = this._store.select(selectLoadedCityWeatherDetails);
+  weatherLoadingStatus$ = this._store.select(selectCityWeatherLoadingStatus);
+
   temperatureHistory$ = this._store.select(selectWeatherHistory);
+  temperatureHistoryLoadingStatus$ = this._store.select(selectHistoryLoadingStatus);
 
   deleting$ = this._store.select(selectPinnedCityDeletionStatus).pipe(map(s => s === "loading"));
+
+  loading$ = combineLatest([
+    this.temperatureHistoryLoadingStatus$.pipe(map(s => s === "loading")),
+    this.deleting$
+  ]).pipe(map(statuses => statuses.some(s => s === true)))
 
   private readonly _unsubscribeAll = new Subject<void>();
 
@@ -117,5 +130,6 @@ export class CityDetailsComponent implements OnInit, OnDestroy {
     }
 
     this._store.dispatch(fetchCityWeather({ id: city.id }));
+    this._store.dispatch(fetchWeatherHistory({ id: city.id }));
   }
 }

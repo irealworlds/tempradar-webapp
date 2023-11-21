@@ -15,6 +15,11 @@ export const selectPinnedCityDetails = createSelector(
   state => state.cityDetails,
 );
 
+export const selectPinnedCityDetailsLoadingStatus = createSelector(
+  (state: AppState) => state.pinnedCities,
+  state => state.detailsLoadingStatus,
+);
+
 export const selectPinnedCityCreationStatus = createSelector(
   (state: AppState) => state.pinnedCities,
   state => state.savingStatus,

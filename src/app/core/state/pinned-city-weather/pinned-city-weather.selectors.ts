@@ -9,6 +9,10 @@ export const selectLoadedCityWeatherDetails = createSelector(
   (state: AppState) => state.pinnedCityWeather,
   state => state.loadedWeatherDetails
 );
+export const selectCityWeatherLoadingStatus = createSelector(
+  (state: AppState) => state.pinnedCityWeather,
+  state => state.loadingStatus
+);
 
 export const selectWeatherHistory = createSelector(
   (state: AppState) => state.pinnedCityWeather,
