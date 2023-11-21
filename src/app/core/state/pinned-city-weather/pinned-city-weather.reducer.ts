@@ -3,13 +3,16 @@ import { initialState } from "@tempradar/core/state/pinned-city-weather/pinned-c
 import {
   cityWeatherFetchingFailure,
   cityWeatherFetchingSuccess,
-  fetchCityWeather
+  fetchCityWeather,
+  fetchWeatherHistory,
+  weatherHistoryFetchingFailure,
+  weatherHistoryFetchingSuccess
 } from "@tempradar/core/state/pinned-city-weather/pinned-city-weather.actions";
 
 export const pinnedCityWeatherReducer = createReducer(
   initialState,
 
-  // Set the loading status
+  // Start loading the current weather
   on(fetchCityWeather, (state, { id }) => ({
     ...state,
     loadedCityId: id,
@@ -17,7 +20,7 @@ export const pinnedCityWeatherReducer = createReducer(
     loadingStatus: "loading",
   })),
 
-  // Set the loading status
+  // Populate the weather details
   on(cityWeatherFetchingSuccess, (state, { details }) => ({
     ...state,
     loadedWeatherDetails: details,
@@ -25,10 +28,32 @@ export const pinnedCityWeatherReducer = createReducer(
     loadingStatus: "success",
   })),
 
-  // Set the loading status
+  // Set the failure status on weather details
   on(cityWeatherFetchingFailure, (state, { errors }) => ({
     ...state,
     loadingErrors: errors,
     loadingStatus: "failure",
+  })),
+
+  // Start loading the weather history
+  on(fetchWeatherHistory, (state) => ({
+    ...state,
+    historyLoadingErrors: [],
+    historyLoadingStatus: "loading",
+  })),
+
+  // Populate the weather history on success
+  on(weatherHistoryFetchingSuccess, (state, { history }) => ({
+    ...state,
+    weatherHistory: history,
+    historyLoadingErrors: [],
+    historyLoadingStatus: "success",
+  })),
+
+  // Set the failure status on weather details
+  on(weatherHistoryFetchingFailure, (state, { errors }) => ({
+    ...state,
+    historyLoadingErrors: errors,
+    historyLoadingStatus: "failure",
   })),
 )

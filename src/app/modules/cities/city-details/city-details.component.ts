@@ -5,16 +5,18 @@ import {
   selectPinnedCityDeletionStatus,
   selectPinnedCityDetails
 } from "@tempradar/core/state/pinned-cities/pinned-city.selectors";
-import { filter, firstValueFrom, map, Observable, Subject, takeUntil } from "rxjs";
+import { filter, firstValueFrom, map, Subject, takeUntil } from "rxjs";
 import { ToastNotification, ToastService, ToastType } from "@irealworlds/toast-notifications";
 import { ActivatedRoute, Router } from "@angular/router";
 import { deletePinnedCity } from "@tempradar/core/state/pinned-cities/actions/delete-pinned-city.actions";
 import { loadPinnedCityDetails } from "@tempradar/core/state/pinned-cities/actions/pinned-city-details.actions";
-import { ColorSchemeService } from "@tempradar/core/color-scheme/color-scheme.service";
-import { toObservable } from "@angular/core/rxjs-interop";
-import { fetchCityWeather } from "@tempradar/core/state/pinned-city-weather/pinned-city-weather.actions";
 import {
-  selectLoadedCityWeatherDetails
+  fetchCityWeather,
+  fetchWeatherHistory
+} from "@tempradar/core/state/pinned-city-weather/pinned-city-weather.actions";
+import {
+  selectLoadedCityWeatherDetails,
+  selectWeatherHistory
 } from "@tempradar/core/state/pinned-city-weather/pinned-city-weather.selectors";
 
 @Component({
@@ -24,79 +26,9 @@ import {
 export class CityDetailsComponent implements OnInit, OnDestroy {
   city$ = this._store.select(selectPinnedCityDetails);
   weather$ = this._store.select(selectLoadedCityWeatherDetails);
+  temperatureHistory$ = this._store.select(selectWeatherHistory);
 
   deleting$ = this._store.select(selectPinnedCityDeletionStatus).pipe(map(s => s === "loading"));
-
-  systemScheme$: Observable<"light"|"dark"|undefined>;
-
-  chartOptions = {
-    animationEnabled: true,
-    theme: "dark1",
-    toolTip: {
-      shared: true
-    },
-    data: [
-      {
-        type: "column",
-        name: "Maximum Temperature",
-        showInLegend: true,
-        yValueFormatString: "#.## ºC",
-        dataPoints: [
-          { y: 450 },
-          { y: 414},
-          { y: 520 },
-          { y: 460 },
-          { y: 450 },
-          { y: 500 },
-          { y: 480 },
-          { y: 480 },
-          { y: 410 },
-          { y: 500 },
-          { y: 480 },
-          { y: 510 }
-        ]
-      }, {
-        type: "column",
-        name: "Minimum Temperature",
-        showInLegend: true,
-        yValueFormatString: "#.## ºC",
-        dataPoints: [
-          { y: 450-100 },
-          { y: 414-100 },
-          { y: 520-100 },
-          { y: 460-100 },
-          { y: 450-100 },
-          { y: 500-100 },
-          { y: 480-100 },
-          { y: 480-100 },
-          { y: 410-100 },
-          { y: 500-100 },
-          { y: 480-100 },
-          { y: 510-100 }
-        ]
-      }, {
-        type: "line",
-        indexLabelFontSize: 16,
-        name: "Average Temperature",
-        showInLegend: true,
-        yValueFormatString: "#.## ºC",
-        dataPoints: [
-          { y: 450 },
-          { y: 414 },
-          { y: 520 },
-          { y: 460 },
-          { y: 450 },
-          { y: 500 },
-          { y: 480 },
-          { y: 480 },
-          { y: 410 },
-          { y: 500 },
-          { y: 480 },
-          { y: 510 }
-        ]
-      }
-    ]
-  };
 
   private readonly _unsubscribeAll = new Subject<void>();
 
@@ -105,26 +37,19 @@ export class CityDetailsComponent implements OnInit, OnDestroy {
     private readonly _toastService: ToastService,
     private readonly _router: Router,
     private readonly _activatedRoute: ActivatedRoute,
-    private readonly _colorSchemeService: ColorSchemeService,
   ) {
-    this.systemScheme$ = toObservable(this._colorSchemeService.systemPreference);
   }
 
   /** @inheritDoc */
   ngOnInit(): void {
     this._store.dispatch(loadPinnedCityDetails({ id: this._activatedRoute.snapshot.paramMap.get('cityKey')! }));
 
-    this.systemScheme$.pipe(
-      takeUntil(this._unsubscribeAll)
-    ).subscribe(preference => {
-      this.chartOptions.theme = preference === "dark" ? "dark2" : "light2";
-    });
-
     this.city$.pipe(
       takeUntil(this._unsubscribeAll)
     ).subscribe(city => {
       if (city?.id) {
         this._store.dispatch(fetchCityWeather({ id: city.id }))
+        this._store.dispatch(fetchWeatherHistory({ id: city.id }))
       }
     });
   }

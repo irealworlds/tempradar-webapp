@@ -1,15 +1,7 @@
-export interface PinnedCityWeatherDetails {
-  temperature: number;
-  feelsLikeTemperature: number;
-  windSpeed: number;
-  atmosphericPressure: number;
-  ultravioletIndex: number;
-  carbonMonoxide: number;
-  nitrogenDioxide: number;
-  ozone: number;
-  sulphurDioxide: number;
-  pm25: number;
-  pm10: number;
+import { CityWeather } from "@tempradar/modules/cities/city-details/city-temperature-card/city-weather.model";
+import { AirQuality } from "@tempradar/modules/cities/city-details/city-air-quality-card/air-quality.model";
+
+export interface PinnedCityWeatherDetails extends CityWeather, AirQuality {
   usEpaIndex: number;
   gbDefraIndex: number;
 }

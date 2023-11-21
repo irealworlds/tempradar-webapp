@@ -1,0 +1,58 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-subtitle i18n>
+      Data
+    </mat-card-subtitle>
+    <mat-card-title i18n>
+      Air Quality
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="mt-6 border-t border-gray-100 dark:border-gray-500">
+      <dl class="divide-y divide-gray-100 dark:divide-gray-500">
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Carbon monoxide (CO)</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
+            {{ airQuality?.carbonMonoxide | number:'1.2-2' }}
+            μg/m<sup>3</sup>
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Ozone (O3)</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
+            {{ airQuality?.ozone | number:'1.2-2' }}
+            μg/m<sup>3</sup>
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Nitrogen dioxide (NO2)</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
+            {{ airQuality?.nitrogenDioxide | number:'1.2-2' }}
+            μg/m<sup>3</sup>
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>Sulphur dioxide (SO2)</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
+            {{ airQuality?.sulphurDioxide | number:'1.2-2' }}
+            μg/m<sup>3</sup>
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>PM 2.5</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
+            {{ airQuality?.pm25 | number:'1.2-2' }}
+            μg/m<sup>3</sup>
+          </dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300" i18n>PM 10</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-400 sm:col-span-2 sm:mt-0">
+            {{ airQuality?.pm10 | number:'1.2-2' }}
+            μg/m<sup>3</sup>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </mat-card-content>
+</mat-card>
