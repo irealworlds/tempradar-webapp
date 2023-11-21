@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleCh
 import { CommonModule } from "@angular/common";
 import { CanvasJS, CanvasJSAngularChartsModule, CanvasJSChart } from "@canvasjs/angular-charts";
 import { MatCardModule } from "@angular/material/card";
-import { BehaviorSubject, Observable, Subject, takeUntil } from "rxjs";
+import { BehaviorSubject, Observable, Subject, takeUntil, tap } from "rxjs";
 import { toObservable } from "@angular/core/rxjs-interop";
 import { ColorSchemeService } from "@tempradar/core/color-scheme/color-scheme.service";
 import {
@@ -59,7 +59,9 @@ export class CityTemperatureHistoryGraphComponent implements OnInit, OnChanges, 
   constructor(
     private readonly _colorSchemeService: ColorSchemeService,
   ) {
-    this.systemScheme$ = toObservable(this._colorSchemeService.systemPreference);
+    this.systemScheme$ = toObservable(this._colorSchemeService.systemPreference).pipe(
+      tap(value => console.debug('x,', value))
+    );
   }
 
   /** @inheritDoc */
@@ -75,9 +77,7 @@ export class CityTemperatureHistoryGraphComponent implements OnInit, OnChanges, 
 
       this.chart.options = options;
       this.chart.shouldUpdateChart = true;
-      // Object.assign(this.chart, options);
       (this.chart as any).render();
-      console.debug(options.data, (this.chart as any).data);
     });
 
     // When the system theme changes, update the chart theme to match

@@ -83,8 +83,6 @@ export class CityDetailsComponent implements OnInit, OnDestroy {
       filter(status => ["success", "failure"].includes(status))
     ));
 
-    console.debug(status);
-
     switch (status) {
       case "success": {
         this._toastService.showToast(new ToastNotification({

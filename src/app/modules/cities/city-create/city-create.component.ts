@@ -95,7 +95,6 @@ export class CityCreateComponent implements OnInit, OnDestroy {
             filter(status => ["success", "failure"].includes(status))
           )
       );
-      console.debug('result: ', result);
 
       switch (result) {
         case "success": {
