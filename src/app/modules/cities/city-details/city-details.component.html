@@ -59,40 +59,7 @@
     @if (weatherLoadingStatus$ | async; as status) {
       @if (status === "success") {
         @if (weather$ | async; as weather) {
-          <mat-card class="group overflow-hidden">
-            <mat-card-content class="relative">
-              <mat-icon fontIcon="error" class="absolute right-10 top-1/2 transform -translate-y-1/2 scale-[4] group-hover:scale-[5] opacity-5 transition-transform duration-500"></mat-icon>
-
-              <mat-card-subtitle i18n>
-                US - EPA standard
-              </mat-card-subtitle>
-              <mat-card-title>
-                @switch (weather.usEpaIndex) {
-                  @case(1) {
-                    <span class="text-green-500" i18n>Good</span>
-                  }
-                  @case(2) {
-                    <span class="text-yellow-500" i18n>Moderate</span>
-                  }
-                  @case(3) {
-                    <span class="text-yellow-500" i18n>Unhealthy for sensitive group</span>
-                  }
-                  @case(4) {
-                    <span class="text-red-500" i18n>Unhealthy</span>
-                  }
-                  @case(5) {
-                    <span class="text-red-500" i18n>Very Unhealthy</span>
-                  }
-                  @case(6) {
-                    <span class="text-red-500" i18n>Hazardous</span>
-                  }
-                  @default {
-                    <span class="text-gray-900 dark:text-gray-300" i18n>Unknown</span>
-                  }
-                }
-              </mat-card-title>
-            </mat-card-content>
-          </mat-card>
+          <app-us-epa-index-card [epaIndex]="weather"></app-us-epa-index-card>
         }
       } @else {
         <ngx-skeleton-loader appearance="circle" [theme]="{ borderRadius: '0.5rem', width: '100%', height: '100px' }"></ngx-skeleton-loader>
