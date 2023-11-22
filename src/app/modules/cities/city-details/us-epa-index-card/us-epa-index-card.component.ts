@@ -21,7 +21,7 @@ export class UsEpaIndexCardComponent {
   get icon(): string {
     switch (this.epaIndex?.usEpaIndex) {
       case 1: return "check_circle";
-      case 2: return "check_circle";
+      case 2: return "warning";
       case 3: return "warning";
       case 4: return "warning";
       case 5: return "error";
