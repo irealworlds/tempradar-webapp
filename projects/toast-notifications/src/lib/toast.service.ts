@@ -64,7 +64,7 @@ export class ToastService {
       this.createToastComponent();
     }
 
-    this.toasts.update(toasts => [...toasts, toast]);
+    this.toasts.update(toasts => [toast, ...toasts]);
 
     const autoCloseTimeout = toast.autoCloseTimeout ?? this._configuration.autoCloseTimeout;
     if (autoCloseTimeout) {
