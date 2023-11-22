@@ -19,24 +19,28 @@ import {
 import {
   UsEpaIndexCardComponent
 } from "@tempradar/modules/cities/city-details/us-epa-index-card/us-epa-index-card.component";
+import {
+  GbDefraIndexCardComponent
+} from "@tempradar/modules/cities/city-details/gb-defra-index-card/gb-defra-index-card.component";
 
 
 @NgModule({
   declarations: [
     CityDetailsComponent
   ],
-    imports: [
-        CommonModule,
-        CityDetailsRoutingModule,
-        MatCardModule,
-        MatIconModule,
-        MatButtonModule,
-        NgxSkeletonLoaderModule,
-        NgxChartsModule,
-        CityWeatherCardComponent,
-        CityAirQualityCardComponent,
-        CityTemperatureHistoryGraphComponent,
-        UsEpaIndexCardComponent,
-    ]
+  imports: [
+    CommonModule,
+    CityDetailsRoutingModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    NgxSkeletonLoaderModule,
+    NgxChartsModule,
+    CityWeatherCardComponent,
+    CityAirQualityCardComponent,
+    CityTemperatureHistoryGraphComponent,
+    UsEpaIndexCardComponent,
+    GbDefraIndexCardComponent,
+  ]
 })
 export class CityDetailsModule { }
