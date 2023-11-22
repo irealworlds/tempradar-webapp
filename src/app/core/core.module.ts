@@ -3,12 +3,20 @@ import { EnvironmentModule } from "@tempradar/core/environment/environment.modul
 import { environmentConfiguration } from "@tempradar/environments/environment";
 import { IdentityModule } from "@tempradar/core/identity/identity.module";
 import { ToastConfiguration, ToastModule } from "@irealworlds/toast-notifications";
+import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
+import { provideStore, StoreModule } from "@ngrx/store";
+import { reducersConfig } from "@tempradar/core/state/reducers.config";
+import { EffectsModule, provideEffects } from "@ngrx/effects";
+import { effectsConfig } from "@tempradar/core/state/effects.config";
 
 @NgModule({
   imports: [
     EnvironmentModule.forRoot(environmentConfiguration),
     IdentityModule,
     ToastModule,
+    NgxSkeletonLoaderModule,
+    StoreModule.forRoot(reducersConfig),
+    EffectsModule.forRoot(effectsConfig),
   ],
   providers: [
     {
@@ -16,7 +24,9 @@ import { ToastConfiguration, ToastModule } from "@irealworlds/toast-notification
       useValue: new ToastConfiguration({
         autoCloseTimeout: 4000
       })
-    }
+    },
+    provideStore(reducersConfig),
+    provideEffects(effectsConfig),
   ]
 })
 export class CoreModule {

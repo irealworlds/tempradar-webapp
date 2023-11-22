@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-card-content class="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4 divide-x divide-gray-200 dark:divide-gray-500/20">
+    <div class="px-4 py-6 sm:px-6 lg:px-8">
+      <p class="text-sm font-medium leading-6 text-gray-400" i18n>Temperature</p>
+      <p class="mt-2 flex items-baseline gap-x-2">
+        <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
+          {{ weather?.temperature }}
+        </span>
+        <span class="text-sm text-gray-400">&deg;C</span>
+      </p>
+    </div>
+    <div class="px-4 py-6 sm:px-6 lg:px-8">
+      <p class="text-sm font-medium leading-6 text-gray-400" i18n>Wind Speed</p>
+      <p class="mt-2 flex items-baseline gap-x-2">
+        <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
+          {{ weather?.windSpeed }}
+        </span>
+        <span class="text-sm text-gray-400">km/h</span>
+      </p>
+    </div>
+    <div class="px-4 py-6 sm:px-6 lg:px-8">
+      <p class="text-sm font-medium leading-6 text-gray-400" i18n>Pressure</p>
+      <p class="mt-2 flex items-baseline gap-x-2">
+        <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
+          {{ weather?.atmosphericPressure }}
+        </span>
+        <span class="text-sm text-gray-400">mb</span>
+      </p>
+    </div>
+    <div class="px-4 py-6 sm:px-6 lg:px-8">
+      <p class="text-sm font-medium leading-6 text-gray-400" i18n>UV Index</p>
+      <p class="mt-2 flex items-baseline gap-x-2">
+        <span class="text-4xl font-mono font-light tracking-tight dark:text-white border shadow px-2 rounded {{ ultravioletClass }} select-none">
+          {{ weather?.ultravioletIndex }}
+        </span>
+      </p>
+    </div>
+  </mat-card-content>
+</mat-card>
