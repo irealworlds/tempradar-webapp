@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, ViewChild } from "@angular/core";
+import { Component, computed, ElementRef, HostListener, ViewChild } from "@angular/core";
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { animate, state, style, transition, trigger } from "@angular/animations";
@@ -38,6 +38,10 @@ export class NavbarLayoutComponent {
   profileDropdownContainer?: ElementRef<HTMLDivElement>;
 
   currentIdentity$ = this._identityService.currentIdentity;
+  profileImageUri$ = computed(() => {
+    const name = this.currentIdentity$()?.firstName + ' ' + this.currentIdentity$()?.lastName;
+    return `https://ui-avatars.com/api/?background=random&name=${name}`;
+  });
 
   navbarItems = [
     {
