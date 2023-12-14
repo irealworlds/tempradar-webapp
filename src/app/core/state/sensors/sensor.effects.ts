@@ -4,7 +4,10 @@ import { SensorService } from "@tempradar/modules/sensors/services/sensor.servic
 import { catchError, map, of, switchMap } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
 import {
+  loadSensorReadings,
   loadSensors,
+  sensorReadingsLoadingFailure,
+  sensorReadingsLoadingSuccess,
   sensorsLoadingFailure,
   sensorsLoadingSuccess
 } from "@tempradar/core/state/sensors/sensor.actions";
@@ -25,6 +28,19 @@ export class SensorEffects {
         this._sensorService.fetchAll().pipe(
           map(sensors => sensorsLoadingSuccess({ sensors: sensors.items })),
           catchError((error: HttpErrorResponse) => of(sensorsLoadingFailure({ errors: [ error.message ] })))
+        )
+      )
+    )
+  );
+
+  // Load a sensor's readings
+  loadSensorReadings$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(loadSensorReadings),
+      switchMap(({ sensorKey }) =>
+        this._sensorService.fetchReadings(sensorKey).pipe(
+          map(response => sensorReadingsLoadingSuccess({ sensorKey, readings: response.items })),
+          catchError((error: HttpErrorResponse) => of(sensorReadingsLoadingFailure({ errors: [ error.message ] })))
         )
       )
     )

@@ -1,0 +1,23 @@
+<div class="flex flex-col gap-6">
+  <div class="mb-7">
+    <h2 class="text-xl text-gray-900 dark:text-gray-300" i18n>
+      Sensor Readings
+    </h2>
+    <p class="text-sm text-gray-500 dark:text-gray-400" i18n>
+      Information received from a sensor you have pinned to your account.
+    </p>
+  </div>
+
+  @if (latestReading$ | async; as reading) {
+    <app-sensor-current-reading [reading]="reading"></app-sensor-current-reading>
+  }
+
+  <div class="grid lg:grid-cols-2 gap-6">
+    @if (historicalTemperatures$ | async; as temperatures) {
+      <app-sensor-temperature-history-card [temperatures]="temperatures"></app-sensor-temperature-history-card>
+    }
+    @if (historicalHumidities$ | async; as humidities) {
+      <app-sensor-humidity-history-card [humidities]="humidities"></app-sensor-humidity-history-card>
+    }
+  </div>
+</div>

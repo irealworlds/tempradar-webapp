@@ -4,8 +4,8 @@ import { CommonModule } from "@angular/common";
 import { CreateSensorRoutingModule } from "./create-sensor-routing.module";
 import {
   SensorCardComponent
-} from "@tempradar/modules/sensors/create-sensor/components/sensor-card/sensor-card.component";
-import { CreateSensorComponent } from "@tempradar/modules/sensors/create-sensor/create-sensor.component";
+} from "@tempradar/modules/sensors/modules/create-sensor/components/sensor-card/sensor-card.component";
+import { CreateSensorComponent } from "@tempradar/modules/sensors/modules/create-sensor/create-sensor.component";
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { MatCardModule } from "@angular/material/card";
 import { MatRippleModule } from "@angular/material/core";

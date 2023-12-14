@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CreateSensorComponent } from "@tempradar/modules/sensors/create-sensor/create-sensor.component";
+import { CreateSensorComponent } from "@tempradar/modules/sensors/modules/create-sensor/create-sensor.component";
 
 const routes: Routes = [
   {

@@ -30,7 +30,7 @@
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-actions class="mt-6">
-      <a [routerLink]="['/pinned-sensors/details', sensor!.id]" class="text-sm font-semibold leading-6 flex items-center gap-2 text-gray-500 dark:text-gray-400" mat-button>
+      <a [routerLink]="['/sensors/details', sensor!.sensorId]" class="text-sm font-semibold leading-6 flex items-center gap-2 text-gray-500 dark:text-gray-400" mat-button>
         <span i18n>View details</span>
         <mat-icon fontIcon="arrow_forward"></mat-icon>
       </a>
