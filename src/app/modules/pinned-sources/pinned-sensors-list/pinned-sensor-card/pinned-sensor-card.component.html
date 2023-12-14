@@ -30,10 +30,23 @@
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-actions class="mt-6">
-      <a [routerLink]="['/sensors/details', sensor!.sensorId]" class="text-sm font-semibold leading-6 flex items-center gap-2 text-gray-500 dark:text-gray-400" mat-button>
-        <span i18n>View details</span>
-        <mat-icon fontIcon="arrow_forward"></mat-icon>
+      <a [routerLink]="['/sensors/details', sensor!.sensorId]" class="text-sm font-semibold leading-6 text-gray-500 dark:text-gray-400" mat-button>
+        <div class="flex items-center gap-2">
+          <mat-icon fontIcon="arrow_forward" class="text-base"></mat-icon>
+          <span i18n>View details</span>
+        </div>
       </a>
+      <button type="button" (click)="unpinSensor()" [disabled]="pinning" class="text-sm font-semibold leading-6 text-gray-500 dark:text-gray-400" mat-button>
+        <div class="flex items-center gap-2">
+          @if (pinning) {
+            <mat-spinner diameter="16"></mat-spinner>
+            <span i18n>Unpinning</span>
+          } @else {
+            <mat-icon fontIcon="bookmark_remove" class="text-base"></mat-icon>
+            <span i18n>Unpin sensor</span>
+          }
+        </div>
+      </button>
     </mat-card-actions>
   </mat-card>
 }
