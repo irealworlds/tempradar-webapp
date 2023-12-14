@@ -1,22 +1,28 @@
-@if (citiesLoaded$ | async) {
-  @if (cities$ | async; as cities) {
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 px-2">
-      <div [ngClass]="{ 'mx-auto max-w-lg': cities.length === 0 }">
-        <app-create-source-card [firstSource]="cities.length === 0"></app-create-source-card>
-      </div>
-
-      @for (city of cities$ | async; track city.id) {
-        <app-pinned-city-card [city]="city"></app-pinned-city-card>
-      }
+<div class="mx-2 md:mx-0">
+  <div class="mb-5">
+    <div class="sm:hidden">
+      <label for="tabs" class="sr-only" i18n>Select a tab</label>
+      <select #tabSelect (change)="redirectToSourceType(tabSelect.value)"
+              id="tabs"
+              name="tabs"
+              class="block w-full rounded-md border border-gray-300 focus:border-primary-500 focus:ring-primary-500 py-2 px-2">
+        @for (type of sourceTypes; track $index) {
+          <option [value]="type.path">{{ type.name }}</option>
+        }
+      </select>
     </div>
-  }
-} @else {
-  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 px-2">
-    <ngx-skeleton-loader appearance="circle" [theme]="{ borderRadius: '0.5rem', width: '100%', height: '250px' }"></ngx-skeleton-loader>
-    <ngx-skeleton-loader appearance="circle" [theme]="{ borderRadius: '0.5rem', width: '100%', height: '250px' }"></ngx-skeleton-loader>
-    <ngx-skeleton-loader appearance="circle" [theme]="{ borderRadius: '0.5rem', width: '100%', height: '250px' }"></ngx-skeleton-loader>
-    <ngx-skeleton-loader appearance="circle" [theme]="{ borderRadius: '0.5rem', width: '100%', height: '250px' }"></ngx-skeleton-loader>
-    <ngx-skeleton-loader appearance="circle" [theme]="{ borderRadius: '0.5rem', width: '100%', height: '250px' }"></ngx-skeleton-loader>
-    <ngx-skeleton-loader appearance="circle" [theme]="{ borderRadius: '0.5rem', width: '100%', height: '250px' }"></ngx-skeleton-loader>
+    <div class="hidden sm:block">
+      <nav class="flex space-x-4" aria-label="Tabs">
+        @for (type of sourceTypes; track $index) {
+          <a [routerLink]="type.path"
+             class="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400 rounded-md px-3 py-2 text-sm font-medium"
+             routerLinkActive="bg-primary-100 text-primary-700 hover:text-primary-700 dark:bg-primary-500/10 dark:text-primary-500 dark:hover:text-primary-600">
+            {{ type.name }}
+          </a>
+        }
+      </nav>
+    </div>
   </div>
-}
+
+  <router-outlet></router-outlet>
+</div>

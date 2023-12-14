@@ -1,0 +1,34 @@
+<div class="flex flex-col gap-6">
+  <div class="mb-7">
+    <h2 class="text-xl text-gray-900 dark:text-gray-300" i18n>
+      Sensor Readings
+    </h2>
+    <p class="text-sm text-gray-500 dark:text-gray-400" i18n>
+      Information received from a sensor you have pinned to your account.
+    </p>
+  </div>
+
+  @if (preloading$ | async) {
+    <ngx-skeleton-loader appearance="circle" [theme]="{ borderRadius: '0.5rem', width: '100%', height: '150px' }"></ngx-skeleton-loader>
+
+    <div class="grid lg:grid-cols-2 gap-6">
+      @if (historicalTemperatures$ | async; as temperatures) {
+        <ngx-skeleton-loader appearance="circle" [theme]="{ borderRadius: '0.5rem', width: '100%', height: '500px' }"></ngx-skeleton-loader>
+      }
+      @if (historicalHumidities$ | async; as humidities) {
+        <ngx-skeleton-loader appearance="circle" [theme]="{ borderRadius: '0.5rem', width: '100%', height: '500px' }"></ngx-skeleton-loader>
+      }
+    </div>
+  } @else {
+    <app-sensor-current-reading [reading]="latestReading$ | async"></app-sensor-current-reading>
+
+    <div class="grid lg:grid-cols-2 gap-6">
+      @if (historicalTemperatures$ | async; as temperatures) {
+        <app-sensor-temperature-history-card [temperatures]="temperatures"></app-sensor-temperature-history-card>
+      }
+      @if (historicalHumidities$ | async; as humidities) {
+        <app-sensor-humidity-history-card [humidities]="humidities"></app-sensor-humidity-history-card>
+      }
+    </div>
+  }
+</div>

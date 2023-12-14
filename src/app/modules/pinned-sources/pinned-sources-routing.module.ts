@@ -6,7 +6,12 @@ const routes: Routes = [
   {
     path: '',
     component: PinnedSourcesComponent,
-  }
+    children: [
+      { path: '', redirectTo: 'cities', pathMatch: "full" },
+      { path: 'cities', loadChildren: () => import("@tempradar/modules/pinned-sources/pinned-cities-list/pinned-cities-list.module").then(m => m.PinnedCitiesListModule) },
+      { path: 'sensors', loadChildren: () => import("@tempradar/modules/pinned-sources/pinned-sensors-list/pinned-sensors-list.module").then(m => m.PinnedSensorsListModule) },
+    ]
+  },
 ];
 
 @NgModule({

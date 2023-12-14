@@ -1,0 +1,58 @@
+@if (sensor) {
+  <mat-card class="group overflow-hidden">
+    <mat-card-content>
+      <div class="flex w-full items-center justify-between space-x-6">
+        <div class="flex-1 truncate">
+          <div class="flex items-center space-x-3">
+            <h3 class="truncate text-sm font-medium text-gray-900 dark:text-gray-300">
+              {{ sensor.name }}
+            </h3>
+            <span i18n class="inline-flex flex-shrink-0 items-center rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+              Sensor
+            </span>
+          </div>
+          <p class="mt-1 truncate text-sm text-gray-500 dark:text-gray-400" i18n>
+            Registered on {{ sensor.createdAt | date:'fullDate' }}
+          </p>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="flex divide-x items-stretch divide-gray-200 dark:divide-gray-200/10 pb-0 px-0 mt-3">
+      @if (pinned) {
+        <!-- Pin sensor -->
+        <div class="flex w-0 flex-1 -ml-px">
+          <button type="button" (click)="unpinSensor()" [disabled]="pinning" mat-ripple class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 border border-transparent py-2 text-sm font-semibold text-gray-900 dark:text-gray-300 disabled:opacity-75">
+            @if (pinning) {
+              <mat-spinner diameter="16"></mat-spinner>
+              <ng-container i18n>
+                Unpinning
+              </ng-container>
+            } @else {
+              <mat-icon fontIcon="bookmark_remove" class="text-gray-400"></mat-icon>
+              <ng-container i18n>
+                Unpin sensor
+              </ng-container>
+            }
+          </button>
+        </div>
+      } @else {
+        <!-- Pin sensor -->
+        <div class="flex w-0 flex-1 -ml-px">
+          <button type="button" (click)="pinSensor()" [disabled]="pinning" mat-ripple class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 border border-transparent py-2 text-sm font-semibold text-gray-900 dark:text-gray-300 disabled:opacity-75">
+            @if (pinning) {
+              <mat-spinner diameter="16"></mat-spinner>
+              <ng-container i18n>
+                Pinning
+              </ng-container>
+            } @else {
+              <mat-icon fontIcon="bookmark_add" class="text-gray-400"></mat-icon>
+              <ng-container i18n>
+                Pin sensor
+              </ng-container>
+            }
+          </button>
+        </div>
+      }
+    </mat-card-actions>
+  </mat-card>
+}

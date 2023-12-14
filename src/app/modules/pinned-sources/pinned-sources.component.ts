@@ -1,30 +1,71 @@
-import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { loadPinnedCities } from "@tempradar/core/state/pinned-cities/actions/pinned-cities-list.actions";
-import {
-  selectAllPinnedCities,
-  selectAllPinnedCitiesLoadingStatus
-} from "@tempradar/core/state/pinned-cities/pinned-city.selectors";
-import { AppState } from "@tempradar/core/state/app.state";
-import { map } from "rxjs";
+import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+
+type TSourceType = { name: string, path: string };
 
 @Component({
   selector: 'app-pinned-sources',
   templateUrl: './pinned-sources.component.html'
 })
-export class PinnedSourcesComponent implements OnInit {
-  cities$ = this._store.select(selectAllPinnedCities);
-  citiesLoaded$ = this._store.select(selectAllPinnedCitiesLoadingStatus).pipe(
-    map(status => status === "success")
-  );
+export class PinnedSourcesComponent implements AfterViewInit {
+  @ViewChild("tabSelect") tabSelect?: ElementRef<HTMLSelectElement>;
 
+  sourceTypes: TSourceType[] = [
+    {
+      name: $localize `Cities`,
+      path: './cities'
+    },
+    {
+      name: $localize `Sensors`,
+      path: './sensors'
+    },
+  ];
+
+  /**
+   * PinnedSourcesComponent constructor method.
+   *
+   * @param _router
+   * @param _activatedRoute
+   */
   constructor(
-    private readonly _store: Store<AppState>,
+    private readonly _router: Router,
+    private readonly _activatedRoute: ActivatedRoute,
   ) {
   }
 
   /** @inheritDoc */
-  ngOnInit(): void {
-    this._store.dispatch(loadPinnedCities());
+  ngAfterViewInit(): void {
+    // Set the active tab in the select
+    if (this.tabSelect) {
+      for (const sourceType of this.sourceTypes) {
+        if (this.routeIsActive(sourceType.path)) {
+          this.tabSelect.nativeElement.value = sourceType.path;
+        }
+      }
+    }
+  }
+
+  /**
+   * Redirect to a source type's path.
+   *
+   * @param path
+   */
+  async redirectToSourceType(path: string): Promise<void> {
+    await this._router.navigate([path], {
+      relativeTo: this._activatedRoute
+    });
+  }
+
+  /**
+   * Check if a path is active as the current route.
+   *
+   * @param path
+   */
+  routeIsActive(path: string): boolean {
+    const url = this._router.createUrlTree([path], {
+      relativeTo: this._activatedRoute
+    }).toString();
+
+    return url === this._router.url;
   }
 }

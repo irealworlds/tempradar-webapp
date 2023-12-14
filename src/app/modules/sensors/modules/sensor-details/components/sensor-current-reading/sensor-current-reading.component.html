@@ -1,0 +1,61 @@
+  <mat-card>
+    <mat-card-header>
+      @if (reading) {
+        <mat-card-subtitle i18n>
+          Recorded on {{ reading.createdAt | date:'dd/MM/yyyy, hh:mm:ss' }}
+        </mat-card-subtitle>
+      }
+      <mat-card-title i18n>
+        Current readings
+      </mat-card-title>
+    </mat-card-header>
+    @if (reading) {
+      <mat-card-content class="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-3 lg:divide-x divide-gray-200 dark:divide-gray-500/20">
+        <div class="px-4 py-6 sm:px-6 lg:px-8">
+          <p class="text-sm font-medium leading-6 text-gray-400" i18n>Temperature</p>
+          <p class="mt-2 flex items-baseline gap-x-2">
+          <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
+            {{ reading.temperature }}
+          </span>
+            <span class="text-sm text-gray-400">&deg;C</span>
+          </p>
+        </div>
+        <div class="px-4 py-6 sm:px-6 lg:px-8">
+          <p class="text-sm font-medium leading-6 text-gray-400" i18n>Humidity</p>
+          <p class="mt-2 flex items-baseline gap-x-2">
+          <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
+            {{ reading.humidity }}
+          </span>
+            <span class="text-sm text-gray-400">percent</span>
+          </p>
+        </div>
+        <div class="px-4 py-6 sm:px-6 lg:px-8">
+          <p class="text-sm font-medium leading-6 text-gray-400" i18n>Air Quality</p>
+          <p class="mt-2 flex items-baseline gap-x-2">
+          <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
+            @switch (airQualityLevel) {
+              @case (airQualityLevels.Clear) {
+                <span class="text-lime-500" i18n>Clear</span>
+              }
+              @case (airQualityLevels.Good) {
+                <span class="text-yellow-400" i18n>Good</span>
+              }
+              @case (airQualityLevels.Okay) {
+                <span class="text-orange-600" i18n>Okay</span>
+              }
+              @case (airQualityLevels.Poor) {
+                <span class="text-red-500" i18n>Poor</span>
+              }
+            }
+          </span>
+          </p>
+        </div>
+      </mat-card-content>
+    } @else {
+      <mat-card-content>
+        <h3 class="text-center text-lg text-gray-500 dark:text-gray-400" i18n>
+          No readings recorded
+        </h3>
+      </mat-card-content>
+    }
+  </mat-card>

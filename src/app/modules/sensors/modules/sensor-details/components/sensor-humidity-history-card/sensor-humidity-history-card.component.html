@@ -1,0 +1,21 @@
+@if (humidities) {
+  <mat-card>
+    <mat-card-header>
+      <mat-card-subtitle i18n>
+        Statistics
+      </mat-card-subtitle>
+      <mat-card-title i18n>
+        Humidity History
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="mt-6">
+      @if (humidities.length) {
+        <div id="humidityChartContainer" class="min-h-[400px]"></div>
+      } @else {
+        <h3 class="text-center text-lg text-gray-500 dark:text-gray-400" i18n>
+          No readings recorded
+        </h3>
+      }
+    </mat-card-content>
+  </mat-card>
+}

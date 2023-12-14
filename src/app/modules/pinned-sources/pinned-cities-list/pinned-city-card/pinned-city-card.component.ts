@@ -11,8 +11,7 @@ import { RouterLink } from "@angular/router";
   selector: 'app-pinned-city-card',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatListModule, MatButtonModule, MatIconModule, RouterLink],
-  templateUrl: './pinned-city-card.component.html',
-  styleUrl: './pinned-city-card.component.scss'
+  templateUrl: './pinned-city-card.component.html'
 })
 export class PinnedCityCardComponent {
   @Input() city?: City;

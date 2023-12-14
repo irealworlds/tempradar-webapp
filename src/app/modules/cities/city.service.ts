@@ -32,13 +32,14 @@ export class CityService {
    */
   fetchAll(pagination: PaginationOptions): Observable<PaginatedResult<City>>;
   fetchAll(pagination?: PaginationOptions): Observable<City[]> | Observable<PaginatedResult<City>> {
-    const endpointUri = new URL("/PinnedCities", this._environment.api.baseUri);
 
     if (pagination) {
+      const endpointUri = new URL("/PinnedCities/Paginated", this._environment.api.baseUri);
       endpointUri.searchParams.append('skip', pagination.skip.toString());
       endpointUri.searchParams.append('limit', pagination.limit.toString());
       return this._http.get<PaginatedResult<City>>(endpointUri.toString());
     } else {
+      const endpointUri = new URL("/PinnedCities", this._environment.api.baseUri);
       return this._http.get<City[]>(endpointUri.toString());
     }
   }
