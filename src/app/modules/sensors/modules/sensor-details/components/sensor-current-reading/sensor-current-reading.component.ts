@@ -9,11 +9,10 @@ import { SensorAirQualityLevel } from "@tempradar/modules/sensors/enums/sensor-a
   selector: 'app-sensor-current-reading',
   standalone: true,
   imports: [CommonModule, MatCardModule],
-  templateUrl: './sensor-current-reading.component.html',
-  styleUrl: './sensor-current-reading.component.scss'
+  templateUrl: './sensor-current-reading.component.html'
 })
 export class SensorCurrentReadingComponent {
-  @Input() reading?: SensorReadingDto;
+  @Input() reading?: SensorReadingDto|null;
 
   airQualityLevels = SensorAirQualityLevel;
 

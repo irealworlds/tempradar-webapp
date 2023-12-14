@@ -8,9 +8,7 @@
     </p>
   </div>
 
-  @if (latestReading$ | async; as reading) {
-    <app-sensor-current-reading [reading]="reading"></app-sensor-current-reading>
-  }
+  <app-sensor-current-reading [reading]="latestReading$ | async"></app-sensor-current-reading>
 
   <div class="grid lg:grid-cols-2 gap-6">
     @if (historicalTemperatures$ | async; as temperatures) {
