@@ -12,6 +12,7 @@ import {
 import {
   SensorHumidityHistoryCardComponent
 } from "@tempradar/modules/sensors/modules/sensor-details/components/sensor-humidity-history-card/sensor-humidity-history-card.component";
+import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {
     SensorDetailsRoutingModule,
     SensorCurrentReadingComponent,
     SensorTemperatureHistoryCardComponent,
-    SensorHumidityHistoryCardComponent
+    SensorHumidityHistoryCardComponent,
+    NgxSkeletonLoaderModule
   ]
 })
 export class SensorDetailsModule { }

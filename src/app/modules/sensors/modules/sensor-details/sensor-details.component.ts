@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "@tempradar/core/state/app.state";
-import { selectLatestSensorReading, selectSensorReadings } from "@tempradar/core/state/sensors/sensor.selectors";
+import {
+  selectLatestSensorReading,
+  selectSensorReadingLoadingStatus,
+  selectSensorReadings
+} from "@tempradar/core/state/sensors/sensor.selectors";
 import { ActivatedRoute } from "@angular/router";
 import { loadSensorReadings } from "@tempradar/core/state/sensors/sensor.actions";
 import { map, Observable } from "rxjs";
@@ -13,6 +17,7 @@ import { SensorHistoricalHumidityDto } from "@tempradar/modules/sensors/dtos/sen
 })
 export class SensorDetailsComponent implements OnInit {
   readings$ = this._store.select(selectSensorReadings(this.sensorKey));
+  readingLoadingStatus$ = this._store.select(selectSensorReadingLoadingStatus);
   latestReading$ = this._store.select(selectLatestSensorReading(this.sensorKey));
 
   get historicalTemperatures$(): Observable<SensorHistoricalTemperatureDto[]> {
@@ -34,6 +39,12 @@ export class SensorDetailsComponent implements OnInit {
 
   get sensorKey(): string {
     return this._activatedRoute.snapshot.paramMap.get("sensorKey")!;
+  }
+
+  get preloading$(): Observable<boolean> {
+    return this.readingLoadingStatus$.pipe(
+      map(status => status === "loading" || status === "pending")
+    );
   }
 
   constructor(
