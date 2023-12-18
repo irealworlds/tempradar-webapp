@@ -14,9 +14,9 @@
         <div class="px-4 py-6 sm:px-6 lg:px-8">
           <p class="text-sm font-medium leading-6 text-gray-400" i18n>Temperature</p>
           <p class="mt-2 flex items-baseline gap-x-2">
-          <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
-            {{ reading.temperature }}
-          </span>
+            <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
+              {{ reading.temperature | number:"0.0-2" }}
+            </span>
             <span class="text-sm text-gray-400">&deg;C</span>
           </p>
         </div>
@@ -24,7 +24,7 @@
           <p class="text-sm font-medium leading-6 text-gray-400" i18n>Humidity</p>
           <p class="mt-2 flex items-baseline gap-x-2">
           <span class="text-4xl font-semibold tracking-tight dark:text-white text-gray-800">
-            {{ reading.humidity }}
+            {{ reading.humidity | number:"0.0-2" }}
           </span>
             <span class="text-sm text-gray-400">percent</span>
           </p>

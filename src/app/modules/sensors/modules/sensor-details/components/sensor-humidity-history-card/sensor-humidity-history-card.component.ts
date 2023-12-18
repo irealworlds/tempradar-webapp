@@ -132,10 +132,27 @@ export class SensorHumidityHistoryCardComponent {
       name: $localize `Humidity`,
       showInLegend: true,
       yValueFormatString: "#.## %",
-      dataPoints: humidities.map(reading => ({
-        x: reading.recordedAt,
-        y: reading.humidity
-      }))
+      dataPoints: Array.from(humidities.reduce((accumulator, reading) => {
+        const formattedDate =
+          reading.recordedAt.getFullYear() +
+          "-" +
+          (reading.recordedAt.getMonth() + 1).toString().padStart(2, "0") +
+          "-" +
+          reading.recordedAt.getDate().toString().padStart(2, "0") +
+          "T" +
+          reading.recordedAt.getHours().toString().padStart(2, "0") +
+          ":" +
+          reading.recordedAt.getMinutes().toString().padStart(2, "0") +
+          ":" +
+          reading.recordedAt.getSeconds().toString().padStart(2, "0");
+
+        accumulator.set(formattedDate, reading.humidity);
+
+        return accumulator;
+      }, new Map())).map(([date, temperature]) => ({
+        x: new Date(date),
+        y: temperature
+      })).sort((a, z) => a.x.getTime() - z.x.getTime())
     });
 
     // Update the chart

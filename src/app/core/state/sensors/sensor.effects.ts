@@ -11,6 +11,7 @@ import {
   sensorsLoadingFailure,
   sensorsLoadingSuccess
 } from "@tempradar/core/state/sensors/sensor.actions";
+import { PaginationOptions } from "@tempradar/core/pagination/pagination-options.model";
 
 @Injectable()
 export class SensorEffects {
@@ -38,7 +39,9 @@ export class SensorEffects {
     this._actions$.pipe(
       ofType(loadSensorReadings),
       switchMap(({ sensorKey }) =>
-        this._sensorService.fetchReadings(sensorKey).pipe(
+        this._sensorService.fetchReadings(sensorKey, new PaginationOptions({
+          limit: 100
+        })).pipe(
           map(response => sensorReadingsLoadingSuccess({ sensorKey, readings: response.items })),
           catchError((error: HttpErrorResponse) => of(sensorReadingsLoadingFailure({ errors: [ error.message ] })))
         )
